@@ -19,7 +19,10 @@ package mx.unam.fesa.isoo.dominance;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -28,10 +31,9 @@ import java.util.Set;
  * A program to compute the set of maximal, minimal, and common elements of a
  * given d-dimensional point set, as described in https:/
  * /sites.google.com/site/isoofesa20141/proyectos/proyecto_2
- * /dominacion_vectorial.pdf?attredirects=0&d=1.
- * </p>
- * The points are read from a text file that specifies points in the following
- * format:
+ * /dominacion_vectorial.pdf?attredirects=0&d=1. </p> The points are read from a
+ * text file that specifies points in the following format:
+ * 
  * <pre>
  * d n
  * id1 x11 x12 ... x1d
@@ -39,12 +41,13 @@ import java.util.Set;
  * ...
  * idn xn1 xn2 ... xnd
  * </pre>
- * The first row specifies that there are <code>n</code> <code>d</code>-dimensional
- * points in the set to be processed. The following <code>n</code> describe the
- * points, using a unique id (the elements id#) and its coordinates (the
- * elements x##).
- * </p>
- * The results are printed in the standard output, using the following format:
+ * 
+ * The first row specifies that there are <code>n</code> <code>d</code>
+ * -dimensional points in the set to be processed. The following <code>n</code>
+ * describe the points, using a unique id (the elements id#) and its coordinates
+ * (the elements x##). </p> The results are printed in the standard output,
+ * using the following format:
+ * 
  * <pre>
  * maximales
  * id1 id5 id3 ...
@@ -55,7 +58,6 @@ import java.util.Set;
  * </pre>
  * 
  * @author Carlos Alegría Galicia
- * 
  */
 public class VectorDominance {
 
@@ -63,19 +65,33 @@ public class VectorDominance {
 	 * Main entry of the program
 	 * 
 	 * @param args
-	 * @throws IOException If there is any problem reading the text file 
+	 * @throws IOException
+	 *             If there is any problem reading the text file
 	 */
 	public static void main(String[] args) throws IOException {
+		VectorDominance.compute(args[0]);
+	}
+	
+	/**
+	 * @param filename
+	 * @throws IOException
+	 */
+	public static final void compute(String filename) throws IOException {
+		VectorDominance.compute(Files.newInputStream(FileSystems.getDefault()
+				.getPath(filename)));
+	}
 
-		//
-		// reading points from file
-		//
+	/**
+	 * @param stream
+	 * @throws IOException
+	 */
+	public static final void compute(InputStream stream) throws IOException {
 
-		// the text file is given as a resource; i.e., a file in the program's
-		// classpath
+		BufferedReader in = new BufferedReader(new InputStreamReader(stream));
+		
 		//
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-				ClassLoader.getSystemResourceAsStream("points.txt")));
+		// reading points from input stream
+		//
 
 		String params[] = in.readLine().split(" ");
 		int dim = Integer.parseInt(params[0]);
@@ -140,13 +156,20 @@ public class VectorDominance {
 	/**
 	 * Prints the elements of the given {@link Set}, separated by a space.
 	 * 
-	 * @param label A String printed before the set's contents
-	 * @param set The {@link Set} whose contents are to be printed.
+	 * @param label
+	 *            A String printed before the set's contents
+	 * @param set
+	 *            The {@link Set} whose contents are to be printed.
 	 */
 	private static final void printSet(String label, Set<?> set) {
 		System.out.println(label);
-		for (Object object : set) {
-			System.out.print(object + " ");
+		
+		if (set.isEmpty()) return;
+		
+		Iterator<?> iterator = set.iterator();
+		System.out.print(iterator.next());
+		while (iterator.hasNext()) {
+			System.out.print(" " + iterator.next());
 		}
 		System.out.println();
 	}
