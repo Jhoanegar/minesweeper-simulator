@@ -1,4 +1,4 @@
-package mx.unam.fesa.isoo.mss.test;
+package mx.unam.fesa.mss.test;
 
 import java.nio.charset.Charset;
 

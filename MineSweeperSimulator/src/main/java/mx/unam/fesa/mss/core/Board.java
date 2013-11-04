@@ -16,28 +16,23 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.core;
+package mx.unam.fesa.mss.core;
 
-import static mx.unam.fesa.isoo.mss.core.GameEvent.GameState.GAME_FINISHED;
-import static mx.unam.fesa.isoo.mss.core.GameEvent.GameState.GAME_ON;
-import static mx.unam.fesa.isoo.mss.core.GameEvent.GameState.SCORE_CHANGED;
+import static mx.unam.fesa.mss.core.GameEvent.GameState.GAME_FINISHED;
+import static mx.unam.fesa.mss.core.GameEvent.GameState.GAME_ON;
+import static mx.unam.fesa.mss.core.GameEvent.GameState.SCORE_CHANGED;
 
 import java.util.Arrays;
 import java.util.Random;
 
-import mx.unam.fesa.isoo.mss.core.Cell.ContentType;
-import mx.unam.fesa.isoo.mss.core.GameEvent.GameState;
+import mx.unam.fesa.mss.core.Cell.ContentType;
+import mx.unam.fesa.mss.core.GameEvent.GameState;
 
 /**
  * @author Carlos Alegría Galicia
  * 
  */
 public final class Board {
-
-	/* */
-	public static final int MAX_ROWS = 16;
-	/* */
-	public static final int MAX_COLS = 30;
 
 	/* */
 	private final int minesNumber;
@@ -57,19 +52,19 @@ public final class Board {
 	 */
 	public Board(int rows, int cols, int mines) {
 
-		if (rows <= 0 || rows > MAX_ROWS) {
+		if (rows <= 0) {
 			throw new IllegalArgumentException("Specified rows number " + rows
-					+ "is out of the allowed interval [1, " + MAX_ROWS + "]");
+					+ " is lower than or equal to cero");
 		}
 		
-		if (cols <= 0 || cols > MAX_COLS) {
+		if (cols <= 0) {
 			throw new IllegalArgumentException("Specified cols number " + cols
-					+ "is out of the allowed interval [1, " + MAX_COLS + "]");
+					+ " is lower than or equal to cero");
 		}
 		
 		if (mines <= 0 || mines > cols * rows) {
 			throw new IllegalArgumentException("Specified mines number " + mines
-					+ "is out of the allowed interval [1, rows * cols]");
+					+ " is out of the allowed interval [1, rows * cols]");
 		}
 
 		//
@@ -86,6 +81,8 @@ public final class Board {
 			}
 		}
 		
+		// the cells are spread with almost uniform probability over the board
+		//
 		int col, row, i = 0;
 		Random colRandomizer = new Random();
 		Random rowRandomizer = new Random();
@@ -111,6 +108,9 @@ public final class Board {
 	}
 
 	/**
+	 * Increments the mine count on 8-conn neighbor cells of the cell with
+	 * located at the given coordinates.
+	 * 
 	 * @param row
 	 * @param col
 	 */
@@ -133,6 +133,8 @@ public final class Board {
 	}
 
 	/**
+	 * Execute the given move on this board.
+	 * 
 	 * @param move
 	 * @return
 	 */
@@ -148,10 +150,13 @@ public final class Board {
 
 		switch (move.getType()) {
 		case REMOVE_FLAG:
-			if (cell.getState() != Cell.State.FLAGGED
-					|| cell.getOwner() != move.getSource()) {
+			if (cell.getState() != Cell.State.FLAGGED) {
 				throw new SimulationException("Unable to execute command'"
 					+ move + "': Target cell in wrong state.");
+			}
+			if (cell.getOwner() != move.getSource()) {
+				throw new SimulationException("Unable to execute command'"
+					+ move + "': Target cell belongs to a different player.");
 			}
 
 			cell.state = Cell.State.COVERED;
@@ -197,6 +202,8 @@ public final class Board {
 	}
 	
 	/**
+	 * Return the mines spread in this board.
+	 * 
 	 * @return
 	 */
 	public int getMinesNumber() {
@@ -204,6 +211,8 @@ public final class Board {
 	}
 	
 	/**
+	 * Get the number of mines yet to be discovered.
+	 * 
 	 * @return
 	 */
 	public int getMineCount() {
@@ -211,6 +220,8 @@ public final class Board {
 	}
 	
 	/**
+	 * Get the number of mines discovered so far by the given {@link Player}.
+	 * 
 	 * @return
 	 */
 	public int getMineCount(Player player) {
@@ -218,6 +229,8 @@ public final class Board {
 	}
 	
 	/**
+	 * Gets the player that discovered a mine, if any
+	 * 
 	 * @return
 	 */
 	public Player getDeadPlayer() {
@@ -264,6 +277,32 @@ public final class Board {
 		 */
 		public byte getMineCount() {
 			return mineCount;
+		}
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			switch (state) {
+			case COVERED:
+				return "C";
+			case FLAGGED:
+				return owner + "F";
+			case REVEALED:
+				switch (contentType) {
+				case EMPTY:
+					return owner + "E";
+				case MINE:
+					return owner + "M";
+				case MINE_COUNT:
+					return owner + Integer.toString(mineCount);
+				default:
+					return "";
+				}
+			default:
+				return "";
+			}
 		}
 	}
 }

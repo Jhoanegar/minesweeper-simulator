@@ -16,14 +16,14 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.network;
+package mx.unam.fesa.mss.network;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import mx.unam.fesa.isoo.mss.network.protocol.MSProtocolHandler;
-import mx.unam.fesa.isoo.mss.network.protocol.MSRequestDecoder;
-import mx.unam.fesa.isoo.mss.network.protocol.MSResponseEncoder;
+import mx.unam.fesa.mss.network.protocol.MSProtocolHandler;
+import mx.unam.fesa.mss.network.protocol.MSRequestDecoder;
+import mx.unam.fesa.mss.network.protocol.MSResponseEncoder;
 
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.service.IoService;
@@ -116,5 +116,12 @@ public class MSServer {
 	 */
 	public void broadcastMessage(Object object) {
 		this.acceptor.broadcast(object);
+	}
+	
+	/**
+	 * 
+	 */
+	public void stop() {
+		this.acceptor.unbind();
 	}
 }

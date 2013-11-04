@@ -16,62 +16,26 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.network.protocol;
-
-import mx.unam.fesa.isoo.mss.core.Player;
+package mx.unam.fesa.mss.core;
 
 /**
  * @author Carlos Alegría Galicia
  *
  */
-public final class MSResponseRegister {
-	
-	/* */
-	private boolean accept;
-	/* */
-	private Player player;
-	/* */
-	private String message;
+public interface BoardEvent extends SimulationEvent {
+
+	/**
+	 * @return
+	 */
+	public Cell[][] getBoard();
 	
 	/**
-	 * @return the accept
+	 * @return
 	 */
-	public boolean isAccept() {
-		return accept;
-	}
+	public int getRows();
 	
 	/**
-	 * @param accept the accept to set
+	 * @return
 	 */
-	public void setAccept(boolean accept) {
-		this.accept = accept;
-	}
-	
-	/**
-	 * @return the player
-	 */
-	public Player getPlayer() {
-		return player;
-	}
-	
-	/**
-	 * @param player the player to set
-	 */
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-	
-	/**
-	 * @param message the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
+	public int getCols();
 }

@@ -16,19 +16,19 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.network.protocol;
+package mx.unam.fesa.mss.network.protocol;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
 
-import mx.unam.fesa.isoo.mss.core.Board;
-import mx.unam.fesa.isoo.mss.core.BoardEvent;
-import mx.unam.fesa.isoo.mss.core.Cell;
-import mx.unam.fesa.isoo.mss.core.GameEvent;
-import mx.unam.fesa.isoo.mss.core.Player;
-import mx.unam.fesa.isoo.mss.core.Cell.State;
+import mx.unam.fesa.mss.core.BoardEvent;
+import mx.unam.fesa.mss.core.Cell;
+import mx.unam.fesa.mss.core.Cell.State;
+import mx.unam.fesa.mss.core.GameEvent;
+import mx.unam.fesa.mss.core.Player;
+import mx.unam.fesa.mss.core.Simulator;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
@@ -46,9 +46,10 @@ public class MSResponseEncoder extends ProtocolEncoderAdapter {
 	/**
 	 * The maximum number of chars per message
 	 */
-	public static final int MAX_MESSAGE_LENGTH = (Board.MAX_COLS * Board.MAX_ROWS) << 4
-			+ Integer.toString(Board.MAX_COLS).length()
-			+ Integer.toString(Board.MAX_ROWS).length() + 6;
+	public static final int MAX_MESSAGE_LENGTH = (
+			Simulator.MAX_COLS * Simulator.MAX_ROWS) << 4
+			+ Integer.toString(Simulator.MAX_COLS).length()
+			+ Integer.toString(Simulator.MAX_ROWS).length() + 6;
 
 	/* */
 	private static final Logger LOGGER = LoggerFactory
@@ -131,7 +132,7 @@ public class MSResponseEncoder extends ProtocolEncoderAdapter {
 		iobuffer.flip();
 		out.write(iobuffer);
 
-		LOGGER.debug("Command sent: {}", encodedMessage);
+		LOGGER.debug("Move sent: {}", encodedMessage);
 	}
 
 	/**

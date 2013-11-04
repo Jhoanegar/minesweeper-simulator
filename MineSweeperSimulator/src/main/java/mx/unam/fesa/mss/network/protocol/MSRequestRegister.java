@@ -16,26 +16,36 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.core;
+package mx.unam.fesa.mss.network.protocol;
 
 /**
  * @author Carlos Alegría Galicia
  *
  */
-public interface BoardEvent extends SimulationEvent {
+public final class MSRequestRegister {
+
+	/* */
+	private String name;
 
 	/**
-	 * @return
+	 * @return the name
 	 */
-	public Cell[][] getBoard();
-	
+	public String getName() {
+		return name;
+	}
+
 	/**
-	 * @return
+	 * @param name the name to set
 	 */
-	public int getRows();
-	
-	/**
-	 * @return
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public int getCols();
+	@Override
+	public String toString() {
+		return "(REG " + name + ")";
+	}
 }

@@ -16,37 +16,62 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.core;
+package mx.unam.fesa.mss.network.protocol;
+
+import mx.unam.fesa.mss.core.Player;
 
 /**
  * @author Carlos Alegría Galicia
  *
  */
-public class SimulationException extends RuntimeException {
-
+public final class MSResponseRegister {
+	
+	/* */
+	private boolean accept;
+	/* */
+	private Player player;
+	/* */
+	private String message;
+	
 	/**
-	 * 
+	 * @return the accept
 	 */
-	private static final long serialVersionUID = 1L;
-
-	public SimulationException() {
-		super();
+	public boolean isAccept() {
+		return accept;
 	}
-
-	public SimulationException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+	
+	/**
+	 * @param accept the accept to set
+	 */
+	public void setAccept(boolean accept) {
+		this.accept = accept;
 	}
-
-	public SimulationException(String message, Throwable cause) {
-		super(message, cause);
+	
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return player;
 	}
-
-	public SimulationException(String message) {
-		super(message);
+	
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
-
-	public SimulationException(Throwable cause) {
-		super(cause);
+	
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+	
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

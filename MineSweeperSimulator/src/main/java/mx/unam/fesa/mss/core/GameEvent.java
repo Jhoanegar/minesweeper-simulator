@@ -16,59 +16,54 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.core;
-
-
+package mx.unam.fesa.mss.core;
 
 /**
  * @author Carlos Alegría Galicia
  *
  */
-public interface Cell {
+public interface GameEvent extends SimulationEvent {
 	
 	/**
-	 * @return the contentType
+	 * @return
 	 */
-	public ContentType getContentType();
-
+	public GameState getGameState();
+	
 	/**
-	 * @return the state
+	 * can be called only if state is different from GAME_ON
+	 * 
+	 * @return
+	 * @throws IllegalStateException
 	 */
-	public State getState();
-
+	public int getMinesLeft() throws IllegalStateException;
+	
 	/**
-	 * @return the owner
+	 * can be called only if state is equal to GAME_FINISHED
+	 * 
+	 * @return
+	 * @throws IllegalStateException
 	 */
-	public Player getOwner();
-
+	public Player getWinner() throws IllegalStateException;
+	
 	/**
-	 * @return the mineCount
+	 * can be called only if state is equal to GAME_FINISHED
+	 * 
+	 * @param player
+	 * @return
+	 * @throws IllegalStateException
 	 */
-	public byte getMineCount();
+	public int getMineCount(Player player) throws IllegalStateException;
 
 	/**
 	 * @author Carlos Alegría Galicia
+	 *
 	 */
-	public static enum ContentType {
-		/* no content */
-		EMPTY,
-		/* cell contains a mine */
-		MINE,
-		/* cell contains a positive number indicating how many neighbors (using
-		 * 8-connectivity) contain mines
-		 */
-		MINE_COUNT;
-	}
-	
-	/**
-	 * @author Carlos Alegría Galicia
-	 */
-	public static enum State {
-		/* the cell has not been revealed yet */
-		COVERED,
-		/* the cell has already been revealed */
-		REVEALED,
-		/* the cell has not been revealed yet, and is marked with a flag */
-		FLAGGED;
+	public static enum GameState {
+		/* game on going */
+		GAME_ON,
+		/* game on going, score changed */
+		SCORE_CHANGED,
+		/* game finished, tie */
+		GAME_FINISHED;
 	}
 }

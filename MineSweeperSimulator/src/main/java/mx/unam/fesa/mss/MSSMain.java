@@ -16,11 +16,11 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss;
+package mx.unam.fesa.mss;
 
 import java.util.logging.LogManager;
 
-import mx.unam.fesa.isoo.mss.network.MSServer;
+import mx.unam.fesa.mss.network.MSServer;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;

@@ -16,30 +16,14 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.network.protocol;
+package mx.unam.fesa.mss.core;
 
 /**
  * @author Carlos Alegría Galicia
  *
  */
-public final class MSRequestDecodingException extends RuntimeException {
-
-	private static final long serialVersionUID = 1L;
-		
-	public MSRequestDecodingException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
-	public MSRequestDecodingException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public MSRequestDecodingException(String message) {
-		super(message);
-	}
-
-	public MSRequestDecodingException(Throwable cause) {
-		super(cause);
-	}
+public enum Player {
+	PLAYER_1,
+	PLAYER_2,
+	NONE;
 }

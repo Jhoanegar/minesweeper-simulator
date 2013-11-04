@@ -16,26 +16,37 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.core;
+package mx.unam.fesa.mss.core;
 
 /**
  * @author Carlos Alegría Galicia
  *
  */
-public interface SimulationListener {
+public class SimulationException extends RuntimeException {
 
 	/**
-	 * @param e
+	 * 
 	 */
-	public void onException(SimulationException e);
-	
-	/**
-	 * @param state
-	 */
-	public void gameStateChanged(GameEvent event);
-	
-	/**
-	 * @param state
-	 */
-	public void boardStateChanged(BoardEvent event);
+	private static final long serialVersionUID = 1L;
+
+	public SimulationException() {
+		super();
+	}
+
+	public SimulationException(String message, Throwable cause,
+			boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	public SimulationException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public SimulationException(String message) {
+		super(message);
+	}
+
+	public SimulationException(Throwable cause) {
+		super(cause);
+	}
 }

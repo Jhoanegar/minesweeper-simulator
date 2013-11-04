@@ -16,7 +16,7 @@
  * along with Mine Sweeper Simulator. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package mx.unam.fesa.isoo.mss.core;
+package mx.unam.fesa.mss.core;
 
 /**
  * @author Carlos Alegría Galicia
