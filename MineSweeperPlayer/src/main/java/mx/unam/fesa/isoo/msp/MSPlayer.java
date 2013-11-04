@@ -25,13 +25,13 @@ import static org.apache.mina.statemachine.event.IoHandlerEvents.SESSION_OPENED;
 import java.util.Random;
 
 import mx.unam.fesa.isoo.msp.network.protocol.MSResponseDecondingException;
-import mx.unam.fesa.isoo.mss.core.BoardEvent;
-import mx.unam.fesa.isoo.mss.core.Cell;
-import mx.unam.fesa.isoo.mss.core.GameEvent;
-import mx.unam.fesa.isoo.mss.core.Move;
-import mx.unam.fesa.isoo.mss.core.Move.Type;
-import mx.unam.fesa.isoo.mss.network.protocol.MSRequestRegister;
-import mx.unam.fesa.isoo.mss.network.protocol.MSResponseRegister;
+import mx.unam.fesa.mss.core.BoardEvent;
+import mx.unam.fesa.mss.core.Cell;
+import mx.unam.fesa.mss.core.GameEvent;
+import mx.unam.fesa.mss.core.Move;
+import mx.unam.fesa.mss.core.Move.Type;
+import mx.unam.fesa.mss.network.protocol.MSRequestRegister;
+import mx.unam.fesa.mss.network.protocol.MSResponseRegister;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.statemachine.StateControl;

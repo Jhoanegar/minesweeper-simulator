@@ -28,13 +28,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mx.unam.fesa.isoo.mss.core.BoardEvent;
-import mx.unam.fesa.isoo.mss.core.Cell;
-import mx.unam.fesa.isoo.mss.core.Cell.State;
-import mx.unam.fesa.isoo.mss.core.GameEvent;
-import mx.unam.fesa.isoo.mss.core.GameEvent.GameState;
-import mx.unam.fesa.isoo.mss.core.Player;
-import mx.unam.fesa.isoo.mss.network.protocol.MSResponseRegister;
+import mx.unam.fesa.mss.core.BoardEvent;
+import mx.unam.fesa.mss.core.Cell;
+import mx.unam.fesa.mss.core.GameEvent;
+import mx.unam.fesa.mss.core.Player;
+import mx.unam.fesa.mss.core.Cell.State;
+import mx.unam.fesa.mss.core.GameEvent.GameState;
+import mx.unam.fesa.mss.network.protocol.MSResponseRegister;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
