@@ -24,6 +24,7 @@ import static org.apache.mina.statemachine.event.IoHandlerEvents.SESSION_OPENED;
 
 import java.util.Random;
 
+import mx.unam.fesa.isoo.msp.network.MSClient;
 import mx.unam.fesa.isoo.msp.network.protocol.MSResponseDecondingException;
 import mx.unam.fesa.mss.core.BoardEvent;
 import mx.unam.fesa.mss.core.Cell;
@@ -57,14 +58,17 @@ public class MSPlayer {
 	/* */
 	private Move move = null;
 	/* */
+	private MSClient client = null;
+	/* */
 	private Random random = new Random();
 	
 	
 	/**
 	 * 
 	 */
-	public MSPlayer() {
-		move = new Move();
+	public MSPlayer(MSClient client) {
+		this.client = client; 
+		this.move = new Move();
 	}
 	
 	@IoHandlerTransition(on = SESSION_OPENED, in = REGISTER)
@@ -114,6 +118,11 @@ public class MSPlayer {
 		move.setType(Type.values()[random.nextInt(3)]);
 		
 		session.write(move);
+	}
+	
+	@IoHandlerTransition(in = GAME_FINISHED)
+	public void onGameFinished() {
+		client.stop();
 	}
 	
 	@IoHandlerTransition(on = EXCEPTION_CAUGHT, in = ROOT)

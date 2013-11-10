@@ -76,7 +76,7 @@ public class MSResponseDecoder extends ProtocolDecoderAdapter {
 	/* */
 	private final Matcher boardMatcher = Pattern.compile("\\(BE (\\d|[1-9]\\d*) ([1-9]\\d?) ([1-9]\\d?) ((?:C|(?:P1|P2)[FEM[1-8]])(?: (?:C|(?:P1|P2)[FEM[1-8]]))*)\\)").matcher("");
 	/* */
-	private final Matcher gameOnMatcher = Pattern.compile("\\(GE (\\d|[1-9]\\d*) ON\\)").matcher("");
+	private final Matcher gameOnMatcher = Pattern.compile("\\(GE (\\d|[1-9]\\d*) ON (\\d|[1-9]\\d*)\\)").matcher("");
 	/* */
 	private final Matcher gameScoreMatcher = Pattern.compile("\\(GE (\\d|[1-9]\\d*) SCORE (\\d|[1-9]\\d*)\\)").matcher("");
 	/* */
@@ -239,6 +239,7 @@ public class MSResponseDecoder extends ProtocolDecoderAdapter {
 			
 			this.gameEvent.gameState = GameState.GAME_ON;
 			this.gameEvent.cycle = Integer.parseInt(this.gameOnMatcher.group(1));
+			this.gameEvent.minesLeft = Integer.parseInt(this.gameOnMatcher.group(2));
 			
 			out.write(gameEvent);
 			

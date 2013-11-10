@@ -52,8 +52,12 @@ public class MSClient {
 				new ProtocolCodecFilter(new MSRequestEncoder(), new MSResponseDecoder()));
 
 		StateMachine sm = StateMachineFactory.getInstance(
-				IoHandlerTransition.class).create(MSPlayer.REGISTER, new MSPlayer());
+				IoHandlerTransition.class).create(MSPlayer.REGISTER, new MSPlayer(this));
 		this.connector.setHandler(new StateMachineProxyBuilder().create(IoHandler.class, sm));
 		this.connector.connect(new InetSocketAddress(hostname, port));
+	}
+	
+	public void stop() {
+		this.connector.dispose();
 	}
 }
