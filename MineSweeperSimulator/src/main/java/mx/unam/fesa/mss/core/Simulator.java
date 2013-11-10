@@ -291,9 +291,7 @@ public final class Simulator {
 		}
 
 		@Override
-		public int getMinesLeft() throws IllegalStateException {
-			if (state == GAME_ON)
-				throw new IllegalStateException();
+		public int getMinesLeft() {
 			return board.getMineCount();
 		}
 

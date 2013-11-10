@@ -30,12 +30,11 @@ public interface GameEvent extends SimulationEvent {
 	public GameState getGameState();
 	
 	/**
-	 * can be called only if state is different from GAME_ON
 	 * 
 	 * @return
 	 * @throws IllegalStateException
 	 */
-	public int getMinesLeft() throws IllegalStateException;
+	public int getMinesLeft();
 	
 	/**
 	 * can be called only if state is equal to GAME_FINISHED

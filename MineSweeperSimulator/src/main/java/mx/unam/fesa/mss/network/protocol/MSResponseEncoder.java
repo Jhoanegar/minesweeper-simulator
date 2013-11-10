@@ -78,7 +78,7 @@ public class MSResponseEncoder extends ProtocolEncoderAdapter {
 	/* */
 	private static final String GAME_EVENT_SCORE_FORMAT = "(GE %1$d SCORE %2$d)";
 	/* */
-	private static final String GAME_EVENT_ON_FORMAT = "(GE %1$d ON)";
+	private static final String GAME_EVENT_ON_FORMAT = "(GE %1$d ON %2$d)";
 	/* */
 	private static final String GAME_FINISHED_WINNER[];
 	
@@ -176,7 +176,8 @@ public class MSResponseEncoder extends ProtocolEncoderAdapter {
 					gameEvent.getMineCount(Player.PLAYER_2));
 			break;
 		case GAME_ON:
-			writer.format(GAME_EVENT_ON_FORMAT, gameEvent.getCycle());
+			writer.format(GAME_EVENT_ON_FORMAT, gameEvent.getCycle(),
+					gameEvent.getMinesLeft());
 			break;
 		}
 	}
