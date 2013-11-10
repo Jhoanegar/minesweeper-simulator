@@ -207,14 +207,25 @@ public final class Simulator {
 		@Override
 		public void run() {
 			while (!Thread.interrupted()) {
+				
+				// send board notifications to mark the start of the cycle
+				//
+				LOGGER.info("Board state: {}", boardEvent);
+				if (listener != null)
+					listener.boardStateChanged(boardEvent);
+				
+				// wait for players moves
+				//
+				try {
+					Thread.sleep(CYCLE_LENGTH);
+				} catch (InterruptedException e) {
+					return;
+				}
+				
+				// execute received moves at the end of the cycle
+				//
 				try {
 					boardLock.lock();
-					
-					// board notifications mark the start of the cycle
-					//
-					LOGGER.info("Board state: {}", boardEvent);
-					if (listener != null)
-						listener.boardStateChanged(boardEvent);
 					
 					// moves execution
 					//
@@ -258,12 +269,6 @@ public final class Simulator {
 					cycle++;
 					Arrays.fill(moves, null);
 					boardLock.unlock();
-				}
-
-				try {
-					Thread.sleep(CYCLE_LENGTH);
-				} catch (InterruptedException e) {
-					return;
 				}
 			}
 		}
