@@ -327,7 +327,7 @@ public final class Simulator {
 		public String toString() {
 			switch (state) {
 			case GAME_ON:
-				return "(GE " + cycle + " ON)";
+				return "(GE " + cycle + " ON " + getMinesLeft() + ")";
 			case GAME_FINISHED:
 				return "(GE " + cycle + " FIN " + getWinner()
 						+ " " + getMinesLeft()
