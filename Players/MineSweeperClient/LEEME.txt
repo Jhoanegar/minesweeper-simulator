@@ -1,0 +1,146 @@
+﻿MineSweeperClient
+Agente inteligente para el juego de buscaminas multijudador desarrollado
+en Ruby.
+
+Autores
+  Jhoan Eduardo García Cruz
+  César Rodolfo Flores Vega
+
+Requisitos previos
+  Se necesita cualquier sistema operativo capaz de ejecutar ruby 1.9.3 
+  o superior para usar el sistema. 
+  (Opcional) Se necesita la gema RSpec para ejecutar las 
+    especificaciones ejecutables. Ver apéndice para obtener detalles.
+
+Compilación
+  No necesaria, sólo es necesario darle permisos de ejecución al 
+  archivo 'minesweeperclient.rb'.
+
+Estructura de carpetas
+
+├── LEEME.txt - El archivo que estás viendo.
+├── LICENSE - La licencia de todos los archivos contenidos en el proyecto.
+├── MSC - Descripción general del sistema.
+└── src/ 
+    ├── doc/ - Detalles de la implementación (abrir index.html).
+    ├── lib/ - Código fuente del programa.
+    ├── spec/ - Especificaciones/pruebas del sistema.
+    └── minesweeperclient.rb - Función principal (main).
+
+Ejecución
+  - Para iniciar el sistema, ejecutar el archivo 'minesweeperclient.rb'
+    como si fuera un script, o bien, utilizando el intérprete de ruby
+    anteponiendo 'ruby' al nombre del archivo.
+
+  - Asegurarse de que el servidor está ejecutandose, de lo contrario
+    es posible que, dependiendo del sistema operativo, sea necesario
+    terminar la ejecución del script mediante CTRL + C y reiniciarlo.
+
+  - Al ejecutar el archivo minesweeperclient.rb, éste asume que el servidor
+    se encuentra en 127.0.0.1:4444 y usa el puerto 4445 para mandarle mensajes.
+    Sin embargo, es posible especificar estos datos de la siguiente forma:
+    $./minesweeperclient.rb -p <puerto_de_salida> -s <dirección_del_servidor>
+    Ejemplo:
+    $./minesweeperclient.rb -p 4440 -s 127.0.0.1:4444
+    Nota:
+    Es necesario especificar la dirección del servidor en el formato X.X.X.X:PPPP
+
+  - Por defecto, se crea un archivo llamado log.log en el mismo directorio del que
+    se ejecuta el sistema, sin embargo, es posible especificar el archivo mediante
+    la opción -l:
+    Ejemplo:
+    $./minesweeperclient.rb -l ~/mi_log.txt
+
+  - Por defecto, sólo se mantiene un log de los eventos más importantes del sistema,
+    para obtener información más detallada es necesario especificar la opción -v.
+    Ejemplo:
+    $./minesweeperclient.rb -v
+
+  - Para obtener ayuda ejecutar:
+    $./minesweeperclient.rb -h
+
+Excepciones
+  - El sistema cuenta con un manejo de excepciones interno, sin embargo, no puede
+    detectar si el servidor ha dejado de funcionar y si esto ocurre se tendrá que
+    detener al mismo manualmente.
+
+Bugs
+  - No existen bugs conocidos. De encontrarse alguno, favor de reportarlo en la dirección
+    https://github.com/Jhoanegar/MineSweeperClient/issues
+
+Apéndice
+  Especificación
+	El sistema ha sido especificado utilizando la gema RSpec de ruby, para instalarla
+	ejecutar:
+	$gem install rspec
+	Una vez instalada, es posible ejecutar el siguiente comando para verificar el funcionamiento
+	de las clases incluídas:
+	$rspec src/spec/ -f d -c
+	-f d: Especifica el formato estilo documentación.
+	-c: Permite mostrar el resultado utilizado un código de colores.
+
+  Documentación
+    El código fue documentado utilizando YARD, y por ende, contiene comentarios
+    que permiten la automatización del proceso. Si se requiere realizar modificaciones
+    al código fuente del programa, se recomienda instalar yard:
+    $gem install yard
+    Y ejecutar:
+    $yard doc /src/
+    Para volver a generar la documentación.
+
+  Lista completa de archivos incluídos.
+  
+├── LEEME.txt
+├── LICENSE
+├── MSC
+└── src
+    ├── doc
+    │   ├── Agent.html
+    │   ├── Board.html
+    │   ├── class_list.html
+    │   ├── Client.html
+    │   ├── css
+    │   │   ├── common.css
+    │   │   ├── full_list.css
+    │   │   └── style.css
+    │   ├── file_list.html
+    │   ├── frames.html
+    │   ├── _index.html
+    │   ├── index.html
+    │   ├── Interpreter.html
+    │   ├── js
+    │   │   ├── app.js
+    │   │   ├── full_list.js
+    │   │   └── jquery.js
+    │   ├── method_list.html
+    │   ├── MultiIO.html
+    │   ├── MyLogger.html
+    │   ├── MySocket.html
+    │   ├── OptParse.html
+    │   ├── Play
+    │   │   └── Coords.html
+    │   ├── Play.html
+    │   ├── Rain.html
+    │   ├── String.html
+    │   └── top-level-namespace.html
+    ├── lib
+    │   ├── agent.rb
+    │   ├── board.rb
+    │   ├── client.rb
+    │   ├── core_ext.rb
+    │   ├── interpreter.rb
+    │   ├── multi_io.rb
+    │   ├── mylogger.rb
+    │   ├── mysocket.rb
+    │   ├── optparse.rb
+    │   ├── play.rb
+    │   └── rain.rb
+    ├── minesweeperclient.rb
+    └── spec
+        ├── agent_spec.rb
+        ├── board_spec.rb
+        ├── client_spec.rb
+        ├── interpreter_spec.rb
+        ├── play_spec.rb
+        └── spec_helper.rb
+
